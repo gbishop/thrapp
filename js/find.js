@@ -1,6 +1,15 @@
 /*
 generate the find page locally and enable switch selection of items
 */
+var loadImage = function(uri, callback) {
+      var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+          xhr.onload = function() {
+                  callback(window.URL.createObjectURL(xhr.response), uri);
+                    }
+                      xhr.open('GET', uri, true);
+                        xhr.send();
+}
 
 define([ "route",
          "templates",
@@ -68,6 +77,15 @@ define([ "route",
                     .append('<div class="content-wrap">' +
                             templates.render('find', view) +
                             '</div>');
+                $newPage.find('img[src="images/placeholder.gif"]').each(function(i, e) {
+                    var $img = $(e);
+                    console.log(i, $img.attr('data-src'));
+
+                    loadImage($img.attr('data-src'), function(blobUri) {
+                        $img.attr('src', blobUri);
+                    });
+
+                });
                 $def.resolve($newPage, {title: 'Tar Heel Reader | Find', colors: true});
             }
         });

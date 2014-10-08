@@ -1,5 +1,5 @@
 define([ "state",
-         "requirejs.mustache",
+         "mustache",
          "json!../Templates.en.json"
          ],
         function(state, mustache, Templates) {
