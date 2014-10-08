@@ -1,2 +1,6 @@
 *.swp
 *~
+Templates.*.json
+locale
+tools
+languages
